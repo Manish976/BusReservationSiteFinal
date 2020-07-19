@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+</head>
+<body>
+{% block  navBar %}
+    {{ block.super }}
+{% endblock %}
+{% block form %}
+
+    <hr>
+
+<form action="register" method="post">
+    {% csrf_token%}
+    <div class="row">
+    <div class="col-1"></div>
+    <div class="col-5">
+          <h3 style="text-align: center">Sign Up Form</h3>
+        <div class="form-group">
+                 <label for="exampleInputEmail1">First Name</label>
+                    <input type="Text" name="first_name"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter First name">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+        <div class="form-group">
+                 <label for="exampleInputEmail1"> Last Name</label>
+                    <input type="Text" name="last_name"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Last name">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+        <div class="form-group">
+                 <label for="exampleInputEmail1">Username</label>
+                    <input type="Text" name="username"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="username">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+        <div class="form-group">
+                 <label for="exampleInputEmail1">Email</label>
+                    <input type="Text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+        <div class="form-group">
+                 <label for="exampleInputEmail1">Phone</label>
+                    <input type="Text" name="phone"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contact">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+        <div class="form-group">
+                 <label for="exampleInputEmail1">Password</label>
+                    <input type="password" name="password"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter password">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+        <div class="form-group">
+                 <label for="exampleInputEmail1">Confirm password</label>
+                    <input type="password" name="password2"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirm password">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+                </div><br>
+        <input type="submit" value="Sign Up" class="btn btn-primary">
+</div>
+</div>
+</form>
+<div>
+<h3>
+    {% for message in messages %}
+    {{message}}
+    {%endfor%}
+</h3>
+    </div>
+{% endblock %}
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+</body>
+</html>

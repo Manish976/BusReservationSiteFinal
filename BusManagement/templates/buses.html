@@ -1,0 +1,122 @@
+{% extends 'owner/index.html' %}
+{% block dash%}
+{{ block.super }}
+{% endblock %}
+{% block fom %}
+    {{ block.super }}
+    {% endblock %}
+{% block data %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+
+        <meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{#         <link href="{% static 'sticky-footer-navbar.css'%}" rel="stylesheet">#}
+
+    <title>Title</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-5">
+    <h1 style="text-align: center">FORM FOR STAFFS</h1>
+<h1> </h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+      <div class="form-group">
+                 <label for="exampleInputEmail1">Busname</label>
+                    <input type="Text" name="bus_name"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Busname">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+      <div class="form-group">
+                 <label for="exampleInputEmail1">Bus-num</label>
+                    <input type="Text" name="bus_num"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+
+             Bus Type   :
+       <div class="form-group"><select name="bus_type" class="form-control">
+                     <option value="DELUX">DELUX</option>
+                     <option value="Super DELUX">Super DELUX</option>
+                     <option value="Viking Air Suspension A/C">Viking Air Suspension A/C</option>
+                 </select>
+     </div>
+    <div class="form-group">
+                 <label for="exampleInputEmail1">From</label>
+                    <input type="Text" name="from1"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Source city">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+    <div class="form-group">
+                 <label for="exampleInputEmail1">To</label>
+                    <input type="Text" name="to1"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter destination">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+
+             Shift:<div class="form-group"><select name="shift" class="form-control">
+                     <option value="day">DAY</option>
+                     <option value="night">NIGHT</option>
+                 </select> <br/>
+     </div>
+
+    <div class="form-group">
+                 <label for="exampleInputEmail1">Images</label>
+                    <input type="file" name="image"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="choose your file">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+    <div class="form-group">
+
+                    <input type="hidden" name="date"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Choose date">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+    <div class="form-group">
+                 <label for="exampleInputEmail1">Pick-Time</label>
+                    <input type="time" name="time"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="choose time">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+    <div class="form-group">
+                 <label for="exampleInputEmail1">Pick-destination</label>
+                    <input type="Text" name="dest"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Destination">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+    <div class="form-group">
+                 <label for="exampleInputEmail1">Seat price</label>
+                    <input type="Text" name="fare"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="set fare">
+                     <small id="emailHelp" class="form-text text-muted"></small>
+     </div>
+{##}
+{##}
+{#    Bus Name   : <input type="text" name="bus_name">#}
+{#    Bus Number : <input type="text" name="bus_num">#}
+{#    Bus Type   : <select name="bus_type">#}
+{#                     <option value="DELUX">DELUX</option>#}
+{#                     <option value="Super DELUX">Super DELUX</option>#}
+{#                     <option value="Viking Air Suspension A/C">Viking Air Suspension A/C</option>#}
+{#                 </select>#}
+{#    FROM:<input type="text" name="from1">#}
+{#    To:<input type="text" name="to1">#}
+{#    Shift:<select name="shift">#}
+{#                     <option value="day">DAY</option>#}
+{#                     <option value="night">NIGHT</option>#}
+{#                 </select> <br/>#}
+{#    Images: <input type="file" name="image">#}
+{#    <input type="hidden" name="date">#}
+{#    Pick Time: <input type="time" name="time">#}
+{#    Pick Destination: <input type="text" name="dest">#}
+{#    Fare/Seat Price: <input type="text" name="fare">#}
+
+    <input type="submit" value="Add" class="btn btn-primary">
+</form>
+    </div>
+</div>
+<div class="alert alert-default">    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+</div>
+
+</body>
+</html>
+{% endblock %}

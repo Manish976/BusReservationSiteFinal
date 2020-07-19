@@ -1,0 +1,31 @@
+{% extends 'owner/index.html' %}
+{% block dash %}
+    {{ block.super }}
+{% endblock %}
+{% block fom %}
+    {{ block.super }}
+{% endblock %}
+{% block data %}
+    <table class="table table-hover table-striped table-dark">
+     <tr><th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+            <th>Username</th>
+        <th>Date Joined</th>
+        </tr>
+    {% for users in u %}
+
+
+        <tr>
+            <td>{{ users.first_name }}</td>
+            <td>{{ users.last_name }}</td>
+            <td>{{ users.email}}</td>
+            <td>{{ users.username }}</td>
+            <td>{{ users.date_joined }}</td>
+        </tr>
+
+
+
+    {% endfor %}
+        </table>
+{% endblock %}

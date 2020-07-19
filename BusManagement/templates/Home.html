@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    {% block styles %}
+        <!--link rel="stylesheet" href="{% static 'styles/datePicker.css' %}"-->
+        <link rel="stylesheet" href="{% static 'styles/form.css' %}">
+    {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+ <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+      width: 100%;
+      height: 100%;
+  }
+  </style>
+</head>
+<body>
+{% block Navbar %}
+     {{ block.super }}
+
+{% endblock %}
+<br/>
+<br/>
+<br/>
+<br/>
+
+{% block form %}
+    <h1 style="text-align: center;">Namaste! Tell us where you want to Travel</h1>
+    <hr>
+    {{ block.super }}
+    <br/>
+    <br/>
+    <br/>
+    <h3 style="text-align: center;">Our Services</h3>
+    <hr>
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+   <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="http://westnepalbus.com/imgs/slider/viking1.jpg" alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+    </div>
+    </div>
+        <div class="col">
+   <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="http://westnepalbus.com/imgs/slider/viking2.jpg" alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+    </div>
+    </div>
+        <div class="col-md-4">
+   <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="http://westnepalbus.com/imgs/slider/viking3.jpg" alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+    </div>
+    </div>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+    <div class="col-2" ></div>
+  <div class="col-6"><h4>Namaste!!! </h4>
+      <p class="font-weight-lighter">
+
+Feb , 2020
+On route Lumbini To Kathmandu , new service has been added for both day and night. Namaste Kapilvastu provides both A/C and Deluxe services </p></div>
+  <div class="col-4" style="width: 18rem;"><img src="http://westnepalbus.com/imgs/slider/viking3.jpg" alt="" width="300" height="300"></div>
+</div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+    <div class="col-2" ></div>
+  <div class="col-3" style="width: 18rem;"><img src="http://westnepalbus.com/imgs/slider/viking3.jpg" alt="" width="300" height="300"></div>
+
+  <div class="col-5" ><h4>Online Ticket Booking System </h4>
+      <p class="font-weight-lighter">
+Feb, 2020
+GoBus has started online ticket booking system where customers can directly book tickets through online payment gateway.
+  </p></div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block footer %}
+     {{ block.super }}
+{% endblock %}
+
+
+</body>
+{% block script %}
+<script>
+    let today = new Date().toISOString().substr(0, 10);
+document.querySelector("#today").value = today;
+
+// or...
+
+document.querySelector("#today").valueAsDate = new Date();
+</script>
+{% endblock %}
+</html>

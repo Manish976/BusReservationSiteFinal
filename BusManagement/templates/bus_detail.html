@@ -1,0 +1,60 @@
+{% extends 'owner/index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static '/styles/toggle.css' %}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block dash %}
+    {{ block.super }}
+{% endblock %}
+{% block fom %}
+    {{ block.super }}
+{% endblock %}
+{% block data %}
+    <br/>
+    <div class="row">
+    <div class="col-3">
+    <img src="/media/{{ bus.images }}" alt=" no pic" height="300" width="300">
+    </div>
+    <div class="col-5">
+        <p><h class="text-dark" style="font-size: x-large ; font-family: Ubuntu">Bus number</h><h style="font-family: Ubuntu ;font-size: x-large">:{{  bus.BusNumber }}</h></p><br/>
+        <p><h class="text-dark" style="font-size: x-large ; font-family: Ubuntu"> Bus Type</h><h style="font-family: Ubuntu ;font-size: x-large">:{{  bus.BusType }}</h></p><br/>
+        <p><h class="text-dark" style="font-size: x-large ; font-family: Ubuntu">Route</h> <h style="font-family: Ubuntu ;font-size: x-large">:{{  bus.From }} -
+            {{  bus.To }}</h></p><br/>
+        <p><h class="text-dark" style="font-size: x-large ; font-family: Ubuntu">Shift</h><h style="font-family: Ubuntu ;font-size: x-large">:{{  bus.Shift }}</h></p><br/>
+
+        <form action="{{ bus.id }}/update" method="post">
+            {% csrf_token %}
+            <p><h class="text-dark" style="font-size: x-large ; font-family: Ubuntu">Available :</h>
+  {% if bus.status  %}
+               <th><input type="checkbox" value="0" id="status" name="status" checked ></th>
+            {% else %}
+                <th><input type="checkbox" value="1" id="status" name="status"></th>
+            {% endif %}
+        </p>
+            <br/>
+            <h class="text-dark" style="font-size: x-large ; font-family: Ubuntu"> Available Date:</h><input type="date" name="date" id="today" class="form-control">
+            <input type="submit" value="submit" class="btn btn-primary">
+        </form>
+    </div>
+    </div>
+ <br/>
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+
+</body>
+<script>
+    let today = new Date().toISOString().substr(0, 10);
+document.querySelector("#today").value = today;
+
+// or...
+
+document.querySelector("#today").valueAsDate = new Date();
+</script>
+{% endblock %}
+</html>

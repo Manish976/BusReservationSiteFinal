@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/datePicker.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/button.css' %}">
+    {% endblock %}
+</head>
+<body>
+
+    {% block Navbar %}
+        {{ block.super }}
+    {% endblock %}
+    {% block form %}
+        <hr>
+        <h3 style="text-align: left ; font-family:Operator Mono;"> Your Preferable Date</h3>
+        <hr>
+        <form action="services" method="post">
+    {% csrf_token %}
+            <div class="input-group" >
+<div class="col-md-3">
+    <input id="today" type="date"  name="date" class="form-control"></div>
+    <input type="submit" value="Search" class="btn btn-primary">
+</div>
+</form>
+        <h2>Available Buses for date {{ d }}</h2>
+   <div> <table border="1" class="table table-hover table-bordered  table-striped table-danger"><tr>
+        <th scope="col">Bus Name</th>
+        <th>Bus Type</th>
+        <th>Route</th>
+        <th>Fare</th>
+        <th>Pickup Destination</th>
+        <th>Pickup Time</th>
+        </tr>
+
+
+        {% for datas in data %}<tr>
+     <td>{{ datas.BusName }}</td>
+     <td>{{ datas.BusType }}</td>
+     <td>{{ datas.From }}-{{ datas.To }}</td>
+     <td>{{ datas.fare }}</td>
+     <td>{{ datas.pick_destination }}</td>
+     <td>{{ datas.pick_time }}</td>
+</tr>
+    {% endfor %}
+
+</table>
+    {% endblock %}
+    {% block footer %}
+
+        {{ block.super }}
+    {% endblock %}
+    </div>
+
+
+</body>
+{% block script %}
+<script>
+    let today = new Date().toISOString().substr(0, 10);
+    document.querySelector("#today").value = today;
+    document.querySelector("#today").valueAsDate = new Date();
+</script>
+{% endblock %}
+</html>

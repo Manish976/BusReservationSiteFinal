@@ -1,0 +1,22 @@
+{% extends 'owner/index.html' %}
+{% block dash %}
+    {{ block.super }}
+{% endblock %}
+{% block fom %}
+    {{ block.super }}
+{% endblock %}
+{% block data %}
+    <table>
+<tr>
+    <th>Users</th>
+
+</tr>
+
+        {%  for u in user %}
+             <tr>
+        <td> {{ u }}</td>
+             </tr>
+           {% endfor %}
+
+    </table>
+{% endblock %}

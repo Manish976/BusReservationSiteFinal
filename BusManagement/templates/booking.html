@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block Navbar %}
+        {{ block.super }}
+    {% endblock %}
+    {% block form %}
+    <h1 style="text-align: center;"> Your Seats for {{ date }}  </h1>
+
+    <table border="1" class="table table-striped table-dark">
+    <tr><th style="text-align: center">Seat Number</th></tr>
+    {% for i in seat %}
+        <tr><td style="text-align: center">{{ i }}</td></tr>
+    {% endfor %}
+    </table>
+        <h3 style="text-align: center;">Thank You, For Travelling With Us</h3>
+ {% endblock %}
+
+    {% block footer %}
+        {{ block.super }}
+    {% endblock %}
+</body>
+</html>

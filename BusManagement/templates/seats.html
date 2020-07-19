@@ -1,0 +1,197 @@
+
+{% load static %}
+<!doctype html>
+
+<html>
+	<head>
+		<title></title>
+
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="{% static 'styles/jquery.seat-charts.css'%}">
+		<link rel="stylesheet" type="text/css" href="{%  static 'styles/style.css'%}">
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<div class="container">
+				<div id="seat-map">
+					<div class="front-indicator">Front Face </div>
+
+				</div>
+				<div class="booking-details">
+
+					<form action="{{ i }}/checkout" method="post" name="myform">
+                        {% csrf_token %}
+						<h2 style="font-size: large">Booking Details</h2>
+
+						<h3 style="font-size: large"> Selected Seats (<span id="counter">0</span>):</h3>
+						<ul id="selected-seats" style="font-size: medium"></ul>
+                        <input type="hidden" name="arrayValue" value="" id="arrayValue">
+						<p style="font-size: large">Total: <b>Rs.<span id="total">0</span></b></p>
+						<button type="submit" class="checkout-button" onclick="mySeat()" style="border-radius: 4px; font-size: large; padding: 12px 28px; background-color: #0c5460; color: white;">Checkout </button>
+
+					</form>
+
+
+					<div id="legend"></div>
+
+				</div>
+			</div>
+		</div>
+        <div style="visibility: visible;" id="arrayValue"></div>
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="{% static 'js/jquery.seat-charts.js'%}"></script>
+
+		<script>
+			var firstSeatLabel = 1;
+		    var n=[];
+			$(document).ready(function() {
+				var $cart = $('#selected-seats'),
+					$counter = $('#counter'),
+					$total = $('#total'),
+					sc = $('#seat-map').seatCharts({
+					map: [
+						'ee_ee',
+						'ee_ee',
+						'ee_ee',
+						'ee_ee',
+
+						'ee_ee',
+						'ee_ee',
+						'ee_ee',
+						'eeeee',
+					],
+					seats: {
+
+						e: {
+							price   :{% for buss in bus %}
+                                         {{ buss.fare }}
+                                     {% endfor %},
+							classes : 'economy-class', //your custom CSS class
+							category: 'Bus'
+						}
+
+					},
+					naming : {
+						top : false,
+						getLabel : function (character, row, column) {
+							return firstSeatLabel++;
+						},
+					},
+					legend : {
+						node : $('#legend'),
+					    items : [
+							[ 'e', 'available',   'Available'],
+							[ 'f', 'unavailable', 'Already Booked']
+					    ]
+					},
+					click: function () {
+
+						if (this.status() == 'available') {
+							//let's create a new <li> which we'll add to the cart items
+							$('<li>'+this.data().category+' Seat # '+this.settings.label+': <b>Rs.'+this.data().price+'</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+								.attr('id', 'cart-item-'+this.settings.id)
+								.data('seatId', this.settings.id)
+								.appendTo($cart);
+
+							/*
+							 * Lets update the counter and total
+							 *
+							 * .find function will not find the current seat, because it will change its stauts only after return
+							 * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
+							 */
+							$counter.text(sc.find('selected').length+1);
+							$total.text(recalculateTotal(sc)+this.data().price);
+
+
+							var counter_test=document.getElementById("counter").innerHTML;
+
+							console.log("text "+counter_test);
+
+							n.push(this.settings.label);
+
+							console.log("values "+n.length);
+
+							{#for(var i=0; i<=$counter;i++) {#}
+                            {##}
+                            {#    n.push(this.settings.label);#}
+
+                                for (var i = 0; i <= n.length - 1; i++) {
+                                    console.log(" yeta this is seat id" + n[i]);
+                                }
+
+                                return 'selected';
+                            }
+
+                            else if (this.status() == 'selected') {
+
+							//update the counter
+							$counter.text(sc.find('selected').length-1);
+
+							//and total
+							$total.text(recalculateTotal(sc)-this.data().price);
+
+							//remove the item from our cart
+							$('#cart-item-'+this.settings.id).remove();
+
+							//seat has been vacated
+							return 'available';
+
+						} else if (this.status() == 'unavailable') {
+							//seat has been already booked
+							return 'unavailable';
+						} else {
+							return this.style();
+						}
+					}
+
+				});
+
+
+
+				//this will handle "[cancel]" link clicks
+				$('#selected-seats').on('click', '.cancel-cart-item', function () {
+					//let's just trigger Click event on the appropriate seat, so we don't have to repeat the logic here
+					sc.get($(this).parents('li:first').data('seatId')).click();
+				});
+				 var v=[];
+                 var i=0;
+                {% for a in t %}
+                     v[i]="{{a}}";
+                     i++;
+                {% endfor %}
+
+                console.log(v)
+				//let's pretend some seats have already been booked
+
+				sc.get(v).status('unavailable');
+
+		});
+
+		function recalculateTotal(sc) {
+			var total = 0;
+
+			//basically find every selected seat and sum its price
+			sc.find('selected').each(function () {
+
+				total += this.data().price;
+
+			});
+
+			return total;
+		}
+		function mySeat() {
+
+             var data = {
+                fn: "filename",
+                str: "this_is_a_dummy_test_string"
+              };
+
+
+            document.querySelector("#arrayValue").value = n;
+
+        }
+        mySeat();
+		</script>
+	</body>
+</html>

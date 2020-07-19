@@ -1,0 +1,143 @@
+
+{% block dashboard %}
+    <head>
+    <meta charset="UTF-8">
+
+
+        <meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{#         <link href="{% static 'sticky-footer-navbar.css'%}" rel="stylesheet">#}
+
+    <title>Title</title>
+</head>
+<nav class="navbar navbar-inverse navbar-expand-lg navbar-light bg-light  navbar-fixed-top">
+  <a class="navbar-brand h2" href="#" ><img src="http://westnepalbus.com/imgs/main.png"alt="helo" height="60" width="60"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link h5" href="/dashboard"> Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link h5" href="/buses">Add Bus</a>
+      </li>
+          <li class="nav-item">
+        <a class="nav-link h5" href="/buses/view_bus">View Buses</a>
+      </li>
+          <li class="nav-item">
+        <a class="nav-link h5" href="/dashboard/reservation">Customer Reservation</a>
+      </li>
+
+    </ul>
+  <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item">
+        <a class="nav-link h5" href="">{{ user.first_name }}</a>
+      </li>
+         {% if user.is_authenticated %}
+
+          <li class="nav-item ">
+        <a class="nav-link h5" href="accounts/logout">Logout</a>
+            </li>
+             {% else %}
+              <li class="nav-item">
+             <a class="nav-link h5" href="accounts/register">Register</a>
+              </li>
+              <li class="nav-item">
+             <a class="nav-link h5" href="accounts/login">Login</a>
+              </li>
+        {% endif %}
+
+
+  </ul>
+
+  </div>
+</nav>
+{% endblock %}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+{% block form %}
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+window.onload = function() {
+
+    var chart = new CanvasJS.Chart("chartContainer-2", {
+	animationEnabled: true,
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "Sales Collection"
+	},
+	axisY: {
+		title: "Collected amount"
+	},
+	data: [{
+		type: "column",
+		showInLegend: true,
+		legendMarkerColor: "grey",
+		legendText: "Travels",
+		dataPoints: [
+			{ y: 12000, label: "Sugat Travels" },
+			{ y: 6000,  label: "Mardi Travels" },
+			{ y: 5000,  label: "Hulakhi travels" },
+
+		]
+	}]
+});
+chart.render();
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: "Buses That Travels Most"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00'%'",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: 79.45, label: "Saluna Travels"},
+			{y: 7.31, label: "Mardi Travels"},
+			{y: 7.06, label: "Hulakhi travels"},
+
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<br/>
+<br/>
+<br/>
+<br/>
+<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div id="chartContainer-2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<script src="{% static 'js/canvasjs.min.js'%}"></script>
+</body>
+</html>
+{% endblock %}
